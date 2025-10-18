@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDPlayer Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fas fa-gamepad"></i>
+            <span>LDPlayer</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-link active" data-tab="dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Панель</span>
+            </a>
+            <a href="#" class="nav-link" data-tab="workstations">
+                <i class="fas fa-server"></i>
+                <span>Станции</span>
+            </a>
+            <a href="#" class="nav-link" data-tab="emulators">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Эмуляторы</span>
+            </a>
+            <a href="#" class="nav-link" data-tab="operations">
+                <i class="fas fa-history"></i>
+                <span>История</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div id="status-badge" class="status-badge">
+                <span class="status-dot"></span>
+                <span>Online</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <h1 id="page-title">Панель управления</h1>
+            </div>
+            <div class="top-bar-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Поиск...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Tab -->
+            <section id="dashboard-tab" class="tab active">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Рабочих станций</h3>
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="stat-value" id="stat-workstations">0</div>
+                        <div class="stat-change">+2 этой неделе</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Эмуляторов</h3>
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="stat-value" id="stat-emulators">0</div>
+                        <div class="stat-change">+5 этой неделе</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Активных</h3>
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="stat-value" id="stat-active">0</div>
+                        <div class="stat-change">обновляется каждые 5 сек</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Статус сервера</h3>
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="stat-value" style="color: #10b981;">✓ OK</div>
+                        <div class="stat-change">Все системы работают</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workstations Tab -->
+            <section id="workstations-tab" class="tab">
+                <div class="section-header">
+                    <div>
+                        <h2>Рабочие станции</h2>
+                        <p class="text-secondary">Управление серверами и рабочими станциями</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showCreateWorkstationModal()">
+                        <i class="fas fa-plus"></i> Добавить станцию
+                    </button>
+                </div>
+                <div id="workstations-list" class="items-grid">
+                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>
+                </div>
+            </section>
+
+            <!-- Emulators Tab -->
+            <section id="emulators-tab" class="tab">
+                <div class="section-header">
+                    <div>
+                        <h2>Эмуляторы</h2>
+                        <p class="text-secondary">Управление эмуляторами LDPlayer</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="showCreateEmulatorModal()">
+                        <i class="fas fa-plus"></i> Создать эмулятор
+                    </button>
+                </div>
+                <div id="emulators-list" class="items-grid">
+                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>
+                </div>
+            </section>
+
+            <!-- Operations Tab -->
+            <section id="operations-tab" class="tab">
+                <div class="section-header">
+                    <div>
+                        <h2>История операций</h2>
+                        <p class="text-secondary">Все выполненные операции в системе</p>
+                    </div>
+                </div>
+                <div id="operations-list" class="operations-table">
+                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="create-workstation-modal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('create-workstation-modal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-server"></i> Добавить рабочую станцию</h3>
+                <button class="modal-close" onclick="closeModal('create-workstation-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="createWorkstation(event)">
+                <div class="form-group">
+                    <label>Имя станции</label>
+                    <input type="text" id="ws-name" required placeholder="e.g., Station 1">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>IP адрес</label>
+                        <input type="text" id="ws-ip" required placeholder="192.168.1.100">
+                    </div>
+                    <div class="form-group">
+                        <label>Порт</label>
+                        <input type="number" id="ws-port" required value="5555">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('create-workstation-modal')">
+                        Отмена
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Создать
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="create-emulator-modal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('create-emulator-modal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-mobile-alt"></i> Создать эмулятор</h3>
+                <button class="modal-close" onclick="closeModal('create-emulator-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="createEmulator(event)">
+                <div class="form-group">
+                    <label>Рабочая станция</label>
+                    <select id="emu-workstation" required>
+                        <option value="">-- Выберите станцию --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Имя эмулятора</label>
+                    <input type="text" id="emu-name" required placeholder="e.g., Emulator 1">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Разрешение</label>
+                        <select id="emu-resolution">
+                            <option value="1920x1080">1920x1080</option>
+                            <option value="1280x720">1280x720</option>
+                            <option value="800x600">800x600</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>RAM (MB)</label>
+                        <input type="number" id="emu-ram" value="2048" min="512" max="8192">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('create-emulator-modal')">
+                        Отмена
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Создать
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

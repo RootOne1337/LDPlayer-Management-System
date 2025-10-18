@@ -1,0 +1,101 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#333333">
+    🔐 ПОТОК АУТЕНТИФИКАЦИИ LDPlayerManagementSystem
+  </text>
+
+  <!-- Start Block -->
+  <rect x="100" y="80" width="200" height="60" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" rx="8"/>
+  <text x="200" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1976D2">Запрос к API</text>
+  <text x="200" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#1976D2">POST /api/emulators</text>
+
+  <!-- Decision Block -->
+  <rect x="100" y="180" width="200" height="100" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="8"/>
+  <text x="200" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FF9800">Токен присутствует?</text>
+  <text x="200" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF9800">Проверка Authorization header</text>
+  <text x="200" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF9800">Bearer token validation</text>
+
+  <!-- Unauthorized Block -->
+  <rect x="50" y="320" width="150" height="60" fill="#FFEBEE" stroke="#F44336" stroke-width="2" rx="8"/>
+  <text x="125" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#D32F2F">401 Unauthorized</text>
+  <text x="125" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#D32F2F">WWW-Authenticate: Bearer</text>
+
+  <!-- JWT Validation Block -->
+  <rect x="100" y="320" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="8"/>
+  <text x="200" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2E7D32">JWT Валидация</text>
+  <text x="200" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32">Срок действия, подпись</text>
+
+  <!-- Extract User Block -->
+  <rect x="350" y="320" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="8"/>
+  <text x="450" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2E7D32">Извлечь пользователя</text>
+  <text x="450" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32">Из payload.sub</text>
+
+  <!-- Check Permissions Block -->
+  <rect x="600" y="320" width="150" height="60" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="8"/>
+  <text x="675" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#FF9800">Права доступа?</text>
+  <text x="675" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FF9800">Role-based access</text>
+
+  <!-- Forbidden Block -->
+  <rect x="600" y="420" width="150" height="60" fill="#FFEBEE" stroke="#F44336" stroke-width="2" rx="8"/>
+  <text x="675" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#D32F2F">403 Forbidden</text>
+  <text x="675" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#D32F2F">Недостаточно прав</text>
+
+  <!-- Execute Operation Block -->
+  <rect x="350" y="420" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="8"/>
+  <text x="450" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2E7D32">Выполнить операцию</text>
+  <text x="450" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32">CRUD с эмуляторами</text>
+
+  <!-- Log Operation Block -->
+  <rect x="100" y="420" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="8"/>
+  <text x="200" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2E7D32">Логировать действие</text>
+  <text x="200" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32">user, action, timestamp</text>
+
+  <!-- Success Block -->
+  <rect x="100" y="520" width="200" height="60" fill="#E8F5E8" stroke="#4CAF50" stroke-width="2" rx="8"/>
+  <text x="200" y="540" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2E7D32">200 OK</text>
+  <text x="200" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#2E7D32">Результат операции</text>
+
+  <!-- Connection Arrows -->
+  <!-- Start to Decision -->
+  <path d="M 200 140 L 200 180" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Decision to Unauthorized (No) -->
+  <path d="M 100 230 L 50 280 L 125 350" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Decision to JWT Validation (Yes) -->
+  <path d="M 300 230 L 350 280 L 200 350" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- JWT Validation to Extract User -->
+  <path d="M 300 380 L 350 350" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Extract User to Check Permissions -->
+  <path d="M 550 350 L 600 350" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Check Permissions to Forbidden (No) -->
+  <path d="M 600 380 L 650 400 L 675 450" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Check Permissions to Execute (Yes) -->
+  <path d="M 675 380 L 725 400 L 550 450" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Execute to Log -->
+  <path d="M 450 480 L 200 450" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Log to Success -->
+  <path d="M 200 480 L 200 520" stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666666"/>
+    </marker>
+  </defs>
+
+  <!-- Security Notes -->
+  <rect x="50" y="50" width="700" height="40" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" rx="6"/>
+  <text x="400" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FF9800">
+    🔐 АУТЕНТИФИКАЦИЯ: JWT (HS256, 30 мин) + РОЛЕВАЯ МОДЕЛЬ ДОСТУПА
+  </text>
+</svg>

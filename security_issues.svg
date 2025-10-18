@@ -1,0 +1,116 @@
+<svg width="1000" height="800" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1000" height="800" fill="#FAFAFA"/>
+
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#D32F2F">
+    🚨 КРИТИЧЕСКИЕ ПРОБЛЕМЫ ПРОЕКТА LDPlayerManagementSystem
+  </text>
+
+  <!-- Critical Issues Box (P0) -->
+  <rect x="50" y="80" width="900" height="200" fill="#FFEBEE" stroke="#F44336" stroke-width="4" rx="12"/>
+  <text x="500" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#D32F2F">
+    🔴 КРИТИЧНЫЕ ПРОБЛЕМЫ (P0) - ИСПРАВИТЬ НЕМЕДЛЕННО
+  </text>
+
+  <!-- Critical Issues List -->
+  <text x="70" y="140" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D32F2F">
+    1. Пароли в plaintext в config.json (8 рабочих станций)
+  </text>
+  <text x="90" y="160" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Учетные данные администраторов хранятся открыто
+  </text>
+  <text x="90" y="175" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Компрометация при утечке конфигурации
+  </text>
+
+  <text x="70" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D32F2F">
+    2. Циклическая зависимость в dependencies.py (строка 81)
+  </text>
+  <text x="90" y="220" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Бесконечная рекурсия при создании LDPlayerManager
+  </text>
+  <text x="90" y="235" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Сервер крашится при первом запросе к API
+  </text>
+
+  <text x="70" y="260" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D32F2F">
+    3. Несогласованность путей LDPlayer
+  </text>
+  <text x="90" y="280" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • LDPlayer9 vs LDPlayer9.0 в разных конфигурациях
+  </text>
+  <text x="90" y="295" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • dnconsole.exe vs ldconsole.exe несоответствия
+  </text>
+
+  <!-- High Priority Box (P1) -->
+  <rect x="50" y="320" width="900" height="200" fill="#FFF3E0" stroke="#FF9800" stroke-width="4" rx="12"/>
+  <text x="500" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FF9800">
+    🟡 ВЫСОКИЙ ПРИОРИТЕТ (P1) - ИСПРАВИТЬ В ТЕЧЕНИЕ НЕДЕЛИ
+  </text>
+
+  <!-- High Priority Issues List -->
+  <text x="70" y="380" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF9800">
+    1. Глобальные менеджеры состояния (race conditions)
+  </text>
+  <text x="90" y="400" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Нет очистки памяти при множественных запросах
+  </text>
+  <text x="90" y="415" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Race conditions в многопоточности
+  </text>
+
+  <text x="70" y="440" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF9800">
+    2. Нет обработки ошибок сети
+  </text>
+  <text x="90" y="460" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Нет retry логики для сетевых операций
+  </text>
+  <text x="90" y="475" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Нет timeout management и circuit breaker
+  </text>
+
+  <text x="70" y="500" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF9800">
+    3. Нет валидации входных данных
+  </text>
+  <text x="90" y="520" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • API endpoints принимают любые данные
+  </text>
+  <text x="90" y="535" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Нет проверки существования workstations
+  </text>
+
+  <!-- Medium Priority Box (P2) -->
+  <rect x="50" y="560" width="900" height="150" fill="#E8F5E8" stroke="#4CAF50" stroke-width="4" rx="12"/>
+  <text x="500" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4CAF50">
+    🟢 СРЕДНИЙ ПРИОРИТЕТ (P2) - УЛУЧШИТЬ КОГДА-НИБУДЬ
+  </text>
+
+  <!-- Medium Priority Issues List -->
+  <text x="70" y="620" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4CAF50">
+    1. Проблемы с Unicode в документации
+  </text>
+  <text x="90" y="640" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Эмодзи отображаются как � в логах
+  </text>
+  <text x="90" y="655" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Проблемы с UTF-8 кодировкой
+  </text>
+
+  <text x="70" y="680" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4CAF50">
+    2. Дублирование кода в API endpoints
+  </text>
+  <text x="90" y="700" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Повторяющийся код обработки ошибок
+  </text>
+  <text x="90" y="715" font-family="Arial, sans-serif" font-size="12" fill="#666666">
+     • Слишком широкая ловля исключений
+  </text>
+
+  <!-- Priority Legend -->
+  <rect x="50" y="730" width="900" height="50" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="2" rx="6"/>
+  <text x="500" y="755" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333333">
+    🔴 P0 (Критично) → 🟡 P1 (Высокий) → 🟢 P2 (Средний) → 🔵 P3 (Низкий)
+  </text>
+</svg>

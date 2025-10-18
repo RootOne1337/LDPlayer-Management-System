@@ -1,0 +1,171 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+.classpath
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary files
+*.tmp
+*.bak
+*.temp
+*~
+.tmp/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Node/Frontend (if present)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+out/
+dist/
+build/
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite-journal
+
+# Backup files
+*.backup
+backups/
+*.bak
+.backup/
+
+# Certificates & Keys (SECURITY)
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+secrets.key
+.secrets/
+
+# Configuration
+config.encrypted.json
+local.conf
+debug.conf
+
+# Test artifacts
+.pytest_cache/
+test_results/
+.tox/
+coverage.xml
+
+# Cache
+.cache/
+*.cache
+
+# Dependencies lock files (optional - uncomment if needed)
+# Pipfile.lock
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Jetbrains
+.idea/
+*.iml
+
+# Documentation
+site/
+docs/_build/
+
+# Upload/Download directories
+uploads/
+downloads/
+temp/
+tmp/
+
+# Application-specific
+dashboards/
+reports/
+exports/
+imports/
+
+# Virtual environments
+venv/
+.venv
+env/
+ENV/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Performance
+.performance_cache/
+
+# Dev tools
+.pre-commit-framework/
+.pre-commit-config/

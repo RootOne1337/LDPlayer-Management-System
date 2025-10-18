@@ -1,0 +1,1338 @@
+{
+  "name": "LDPlayer Management System Architecture",
+  "lastModified": "2025-10-17T03:09:18.019Z",
+  "version": "1.0.0",
+  "editorType": "figma",
+  "pages": [
+    {
+      "id": "architecture_page",
+      "name": "Общая архитектура системы",
+      "backgroundColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      },
+      "frames": [
+        {
+          "id": "main_architecture_frame",
+          "name": "Общая архитектура",
+          "type": "FRAME",
+          "x": 100,
+          "y": 50,
+          "width": 1200,
+          "height": 1400,
+          "backgroundColor": {
+            "r": 0.98,
+            "g": 0.98,
+            "b": 0.98,
+            "a": 1
+          },
+          "cornerRadius": 8,
+          "children": [
+            {
+              "id": "title_text",
+              "type": "TEXT",
+              "x": 400,
+              "y": 30,
+              "width": 400,
+              "height": 40,
+              "content": "🏗️ LDPlayer Management System Architecture",
+              "fontSize": 32,
+              "fontWeight": "bold",
+              "fill": {
+                "r": 0.2,
+                "g": 0.2,
+                "b": 0.2,
+                "a": 1
+              }
+            },
+            {
+              "id": "user_level_frame",
+              "name": "Пользовательский уровень",
+              "type": "FRAME",
+              "x": 0,
+              "y": 100,
+              "width": 1200,
+              "height": 120,
+              "backgroundColor": {
+                "r": 0.89,
+                "g": 0.95,
+                "b": 1,
+                "a": 1
+              },
+              "cornerRadius": 0,
+              "children": [
+                {
+                  "id": "web_ui_component",
+                  "type": "RECTANGLE",
+                  "x": 100,
+                  "y": 80,
+                  "width": 200,
+                  "height": 80,
+                  "backgroundColor": {
+                    "r": 0.13,
+                    "g": 0.59,
+                    "b": 0.95,
+                    "a": 1
+                  },
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "id": "web_ui_text",
+                      "type": "TEXT",
+                      "x": 20,
+                      "y": 20,
+                      "width": 160,
+                      "height": 40,
+                      "content": "🌐 Web UI\nReact + Vite\nlocalhost:3000",
+                      "fontSize": 12,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "wpf_desktop_component",
+                  "type": "RECTANGLE",
+                  "x": 350,
+                  "y": 80,
+                  "width": 200,
+                  "height": 80,
+                  "backgroundColor": {
+                    "r": 0.61,
+                    "g": 0.15,
+                    "b": 0.69,
+                    "a": 1
+                  },
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "id": "wpf_text",
+                      "type": "TEXT",
+                      "x": 20,
+                      "y": 20,
+                      "width": 160,
+                      "height": 40,
+                      "content": "💻 WPF Desktop\n.NET 6+\nWindows Only",
+                      "fontSize": 12,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "swagger_component",
+                  "type": "RECTANGLE",
+                  "x": 600,
+                  "y": 80,
+                  "width": 200,
+                  "height": 80,
+                  "backgroundColor": {
+                    "r": 1,
+                    "g": 0.6,
+                    "b": 0,
+                    "a": 1
+                  },
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "id": "swagger_text",
+                      "type": "TEXT",
+                      "x": 20,
+                      "y": 20,
+                      "width": 160,
+                      "height": 40,
+                      "content": "📚 Swagger UI\nAPI Docs\nlocalhost:8000/docs",
+                      "fontSize": 12,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "api_level_frame",
+              "name": "API уровень",
+              "type": "FRAME",
+              "x": 0,
+              "y": 280,
+              "width": 1200,
+              "height": 120,
+              "backgroundColor": {
+                "r": 1,
+                "g": 0.95,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 0,
+              "children": [
+                {
+                  "id": "fastapi_component",
+                  "type": "RECTANGLE",
+                  "x": 100,
+                  "y": 330,
+                  "width": 200,
+                  "height": 80,
+                  "backgroundColor": {
+                    "r": 1,
+                    "g": 0.34,
+                    "b": 0.13,
+                    "a": 1
+                  },
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "id": "fastapi_text",
+                      "type": "TEXT",
+                      "x": 20,
+                      "y": 20,
+                      "width": 160,
+                      "height": 40,
+                      "content": "⚡ FastAPI Server\nPython 3.13\nlocalhost:8000",
+                      "fontSize": 12,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "websocket_component",
+                  "type": "RECTANGLE",
+                  "x": 350,
+                  "y": 330,
+                  "width": 200,
+                  "height": 80,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "id": "websocket_text",
+                      "type": "TEXT",
+                      "x": 20,
+                      "y": 20,
+                      "width": 160,
+                      "height": 40,
+                      "content": "🔗 WebSocket Server\nReal-time Updates\nlocalhost:8001",
+                      "fontSize": 12,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "jwt_component",
+                  "type": "RECTANGLE",
+                  "x": 600,
+                  "y": 330,
+                  "width": 200,
+                  "height": 80,
+                  "backgroundColor": {
+                    "r": 0.38,
+                    "g": 0.49,
+                    "b": 0.55,
+                    "a": 1
+                  },
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "id": "jwt_text",
+                      "type": "TEXT",
+                      "x": 20,
+                      "y": 20,
+                      "width": 160,
+                      "height": 40,
+                      "content": "🔐 JWT Auth\nHS256 Tokens\n30-min expiry",
+                      "fontSize": 12,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "business_logic_frame",
+              "name": "Бизнес-логика",
+              "type": "FRAME",
+              "x": 0,
+              "y": 480,
+              "width": 1200,
+              "height": 100,
+              "backgroundColor": {
+                "r": 0.91,
+                "g": 0.96,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 0,
+              "children": [
+                {
+                  "id": "config_manager",
+                  "type": "RECTANGLE",
+                  "x": 150,
+                  "y": 530,
+                  "width": 180,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 0.47,
+                    "g": 0.33,
+                    "b": 0.28,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "config_text",
+                      "type": "TEXT",
+                      "x": 50,
+                      "y": 8,
+                      "width": 80,
+                      "height": 44,
+                      "content": "⚙️ Config Manager",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "workstation_manager",
+                  "type": "RECTANGLE",
+                  "x": 360,
+                  "y": 530,
+                  "width": 180,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 0.55,
+                    "g": 0.7,
+                    "b": 0.29,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "ws_text",
+                      "type": "TEXT",
+                      "x": 40,
+                      "y": 8,
+                      "width": 100,
+                      "height": 44,
+                      "content": "🏭 Workstation Manager",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ldplayer_manager",
+                  "type": "RECTANGLE",
+                  "x": 570,
+                  "y": 530,
+                  "width": 180,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 1,
+                    "g": 0.6,
+                    "b": 0,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "ld_text",
+                      "type": "TEXT",
+                      "x": 45,
+                      "y": 8,
+                      "width": 90,
+                      "height": 44,
+                      "content": "🎮 LDPlayer Manager",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "workstations_frame",
+              "name": "Рабочие станции",
+              "type": "FRAME",
+              "x": 0,
+              "y": 620,
+              "width": 1200,
+              "height": 200,
+              "backgroundColor": {
+                "r": 0.99,
+                "g": 0.9,
+                "b": 0.93,
+                "a": 1
+              },
+              "cornerRadius": 0,
+              "children": [
+                {
+                  "id": "ws1",
+                  "type": "RECTANGLE",
+                  "x": 80,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws1_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 1",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws2",
+                  "type": "RECTANGLE",
+                  "x": 220,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws2_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 2",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws3",
+                  "type": "RECTANGLE",
+                  "x": 360,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws3_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 3",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws4",
+                  "type": "RECTANGLE",
+                  "x": 500,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws4_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 4",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws5",
+                  "type": "RECTANGLE",
+                  "x": 640,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws5_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 5",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws6",
+                  "type": "RECTANGLE",
+                  "x": 780,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws6_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 6",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws7",
+                  "type": "RECTANGLE",
+                  "x": 920,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws7_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 7",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ws8",
+                  "type": "RECTANGLE",
+                  "x": 1060,
+                  "y": 680,
+                  "width": 120,
+                  "height": 50,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 4,
+                  "children": [
+                    {
+                      "id": "ws8_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 15,
+                      "width": 70,
+                      "height": 20,
+                      "content": "💻 WS 8",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "protocols_frame",
+              "name": "Протоколы связи",
+              "type": "FRAME",
+              "x": 0,
+              "y": 900,
+              "width": 1200,
+              "height": 100,
+              "backgroundColor": {
+                "r": 0.95,
+                "g": 0.9,
+                "b": 0.96,
+                "a": 1
+              },
+              "cornerRadius": 0,
+              "children": [
+                {
+                  "id": "winrm_protocol",
+                  "type": "RECTANGLE",
+                  "x": 100,
+                  "y": 950,
+                  "width": 150,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 0.13,
+                    "g": 0.59,
+                    "b": 0.95,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "winrm_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 8,
+                      "width": 100,
+                      "height": 44,
+                      "content": "🔗 WinRM\nPort 5985",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "smb_protocol",
+                  "type": "RECTANGLE",
+                  "x": 280,
+                  "y": 950,
+                  "width": 150,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "smb_text",
+                      "type": "TEXT",
+                      "x": 35,
+                      "y": 8,
+                      "width": 80,
+                      "height": 44,
+                      "content": "📁 SMB\nPort 445",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "powershell_protocol",
+                  "type": "RECTANGLE",
+                  "x": 460,
+                  "y": 950,
+                  "width": 180,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 1,
+                    "g": 0.6,
+                    "b": 0,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "ps_text",
+                      "type": "TEXT",
+                      "x": 25,
+                      "y": 8,
+                      "width": 130,
+                      "height": 44,
+                      "content": "💙 PowerShell Remoting",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "adb_protocol",
+                  "type": "RECTANGLE",
+                  "x": 670,
+                  "y": 950,
+                  "width": 150,
+                  "height": 60,
+                  "backgroundColor": {
+                    "r": 0.47,
+                    "g": 0.33,
+                    "b": 0.28,
+                    "a": 1
+                  },
+                  "cornerRadius": 6,
+                  "children": [
+                    {
+                      "id": "adb_text",
+                      "type": "TEXT",
+                      "x": 35,
+                      "y": 8,
+                      "width": 80,
+                      "height": 44,
+                      "content": "🤖 ADB Protocol",
+                      "fontSize": 10,
+                      "fill": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security_page",
+      "name": "Проблемы безопасности",
+      "backgroundColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      },
+      "frames": [
+        {
+          "id": "security_frame",
+          "name": "Security Issues",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "width": 1000,
+          "height": 800,
+          "backgroundColor": {
+            "r": 0.98,
+            "g": 0.98,
+            "b": 0.98,
+            "a": 1
+          },
+          "children": [
+            {
+              "id": "security_title",
+              "type": "TEXT",
+              "x": 350,
+              "y": 40,
+              "width": 300,
+              "height": 40,
+              "content": "🚨 КРИТИЧЕСКИЕ ПРОБЛЕМЫ ПРОЕКТА",
+              "fontSize": 28,
+              "fontWeight": "bold",
+              "fill": {
+                "r": 0.82,
+                "g": 0.18,
+                "b": 0.18,
+                "a": 1
+              }
+            },
+            {
+              "id": "critical_issues",
+              "type": "RECTANGLE",
+              "x": 50,
+              "y": 100,
+              "width": 900,
+              "height": 200,
+              "backgroundColor": {
+                "r": 1,
+                "g": 0.92,
+                "b": 0.93,
+                "a": 1
+              },
+              "cornerRadius": 12,
+              "stroke": {
+                "r": 0.96,
+                "g": 0.26,
+                "b": 0.21,
+                "a": 1
+              },
+              "strokeWeight": 4,
+              "children": [
+                {
+                  "id": "critical_text",
+                  "type": "TEXT",
+                  "x": 20,
+                  "y": 20,
+                  "width": 860,
+                  "height": 160,
+                  "content": "🔴 КРИТИЧНЫЕ ПРОБЛЕМЫ (P0) - ИСПРАВИТЬ НЕМЕДЛЕННО:\n\n1. Пароли в plaintext в config.json (8 рабочих станций)\n2. Циклическая зависимость в dependencies.py (строка 81)\n3. Несогласованность путей LDPlayer (LDPlayer9 vs LDPlayer9.0)\n4. Дублирование зависимостей в requirements.txt\n5. Нет интеграции системы шифрования с загрузкой конфигурации",
+                  "fontSize": 14,
+                  "fontWeight": "bold",
+                  "fill": {
+                    "r": 0.82,
+                    "g": 0.18,
+                    "b": 0.18,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "high_priority",
+              "type": "RECTANGLE",
+              "x": 50,
+              "y": 350,
+              "width": 900,
+              "height": 200,
+              "backgroundColor": {
+                "r": 1,
+                "g": 0.95,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 12,
+              "stroke": {
+                "r": 1,
+                "g": 0.6,
+                "b": 0,
+                "a": 1
+              },
+              "strokeWeight": 4,
+              "children": [
+                {
+                  "id": "high_text",
+                  "type": "TEXT",
+                  "x": 20,
+                  "y": 20,
+                  "width": 860,
+                  "height": 160,
+                  "content": "🟡 ВЫСОКИЙ ПРИОРИТЕТ (P1) - ИСПРАВИТЬ В ТЕЧЕНИЕ НЕДЕЛИ:\n\n1. Глобальные менеджеры состояния (race conditions)\n2. Нет обработки ошибок сети (retry, timeout, circuit breaker)\n3. Нет валидации входных данных во всех API endpoints\n4. Нет структурированного логирования с уровнями важности\n5. Нет graceful shutdown сервера",
+                  "fontSize": 14,
+                  "fontWeight": "bold",
+                  "fill": {
+                    "r": 1,
+                    "g": 0.6,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "medium_priority",
+              "type": "RECTANGLE",
+              "x": 50,
+              "y": 600,
+              "width": 900,
+              "height": 150,
+              "backgroundColor": {
+                "r": 0.91,
+                "g": 0.96,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 12,
+              "stroke": {
+                "r": 0.27,
+                "g": 0.67,
+                "b": 0.31,
+                "a": 1
+              },
+              "strokeWeight": 4,
+              "children": [
+                {
+                  "id": "medium_text",
+                  "type": "TEXT",
+                  "x": 20,
+                  "y": 20,
+                  "width": 860,
+                  "height": 110,
+                  "content": "🟢 СРЕДНИЙ ПРИОРИТЕТ (P2) - УЛУЧШИТЬ КОГДА-НИБУДЬ:\n\n1. Исправить проблемы с Unicode в документации\n2. Добавить типизацию ошибок вместо Exception\n3. Убрать дублирование кода в API endpoints\n4. Настроить переменные окружения вместо хардкода\n5. Добавить валидацию конфигурации при загрузке",
+                  "fontSize": 14,
+                  "fontWeight": "bold",
+                  "fill": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flow_page",
+      "name": "Поток аутентификации",
+      "backgroundColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      },
+      "frames": [
+        {
+          "id": "flow_frame",
+          "name": "Security Flow",
+          "type": "FRAME",
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 600,
+          "backgroundColor": {
+            "r": 0.98,
+            "g": 0.98,
+            "b": 0.98,
+            "a": 1
+          },
+          "children": [
+            {
+              "id": "flow_title",
+              "type": "TEXT",
+              "x": 250,
+              "y": 40,
+              "width": 300,
+              "height": 40,
+              "content": "🔐 ПОТОК АУТЕНТИФИКАЦИИ",
+              "fontSize": 28,
+              "fontWeight": "bold",
+              "fill": {
+                "r": 0.33,
+                "g": 0.33,
+                "b": 0.33,
+                "a": 1
+              }
+            },
+            {
+              "id": "start_block",
+              "type": "RECTANGLE",
+              "x": 100,
+              "y": 100,
+              "width": 200,
+              "height": 60,
+              "backgroundColor": {
+                "r": 0.89,
+                "g": 0.95,
+                "b": 1,
+                "a": 1
+              },
+              "cornerRadius": 8,
+              "stroke": {
+                "r": 0.13,
+                "g": 0.59,
+                "b": 0.95,
+                "a": 1
+              },
+              "strokeWeight": 2,
+              "children": [
+                {
+                  "id": "start_text",
+                  "type": "TEXT",
+                  "x": 50,
+                  "y": 20,
+                  "width": 100,
+                  "height": 20,
+                  "content": "Запрос к API",
+                  "fontSize": 12,
+                  "fill": {
+                    "r": 0.13,
+                    "g": 0.59,
+                    "b": 0.95,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "decision_block",
+              "type": "RECTANGLE",
+              "x": 100,
+              "y": 200,
+              "width": 200,
+              "height": 100,
+              "backgroundColor": {
+                "r": 1,
+                "g": 0.95,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 8,
+              "stroke": {
+                "r": 1,
+                "g": 0.6,
+                "b": 0,
+                "a": 1
+              },
+              "strokeWeight": 2,
+              "children": [
+                {
+                  "id": "decision_text",
+                  "type": "TEXT",
+                  "x": 30,
+                  "y": 35,
+                  "width": 140,
+                  "height": 30,
+                  "content": "Токен присутствует?",
+                  "fontSize": 12,
+                  "fill": {
+                    "r": 1,
+                    "g": 0.6,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "unauthorized_block",
+              "type": "RECTANGLE",
+              "x": 50,
+              "y": 350,
+              "width": 150,
+              "height": 60,
+              "backgroundColor": {
+                "r": 1,
+                "g": 0.92,
+                "b": 0.93,
+                "a": 1
+              },
+              "cornerRadius": 8,
+              "stroke": {
+                "r": 0.96,
+                "g": 0.26,
+                "b": 0.21,
+                "a": 1
+              },
+              "strokeWeight": 2,
+              "children": [
+                {
+                  "id": "unauth_text",
+                  "type": "TEXT",
+                  "x": 25,
+                  "y": 20,
+                  "width": 100,
+                  "height": 20,
+                  "content": "401 Unauthorized",
+                  "fontSize": 12,
+                  "fill": {
+                    "r": 0.96,
+                    "g": 0.26,
+                    "b": 0.21,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "validation_block",
+              "type": "RECTANGLE",
+              "x": 100,
+              "y": 340,
+              "width": 200,
+              "height": 60,
+              "backgroundColor": {
+                "r": 0.91,
+                "g": 0.96,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 8,
+              "stroke": {
+                "r": 0.27,
+                "g": 0.67,
+                "b": 0.31,
+                "a": 1
+              },
+              "strokeWeight": 2,
+              "children": [
+                {
+                  "id": "validation_text",
+                  "type": "TEXT",
+                  "x": 50,
+                  "y": 20,
+                  "width": 100,
+                  "height": 20,
+                  "content": "JWT Валидация",
+                  "fontSize": 12,
+                  "fill": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "success_block",
+              "type": "RECTANGLE",
+              "x": 100,
+              "y": 500,
+              "width": 200,
+              "height": 60,
+              "backgroundColor": {
+                "r": 0.91,
+                "g": 0.96,
+                "b": 0.91,
+                "a": 1
+              },
+              "cornerRadius": 8,
+              "stroke": {
+                "r": 0.27,
+                "g": 0.67,
+                "b": 0.31,
+                "a": 1
+              },
+              "strokeWeight": 2,
+              "children": [
+                {
+                  "id": "success_text",
+                  "type": "TEXT",
+                  "x": 75,
+                  "y": 20,
+                  "width": 50,
+                  "height": 20,
+                  "content": "200 OK",
+                  "fontSize": 12,
+                  "fill": {
+                    "r": 0.27,
+                    "g": 0.67,
+                    "b": 0.31,
+                    "a": 1
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "colorStyles": [
+    {
+      "id": "web_ui_blue",
+      "name": "Web UI Blue",
+      "color": {
+        "r": 0.13,
+        "g": 0.59,
+        "b": 0.95,
+        "a": 1
+      }
+    },
+    {
+      "id": "critical_red",
+      "name": "Critical Red",
+      "color": {
+        "r": 0.96,
+        "g": 0.26,
+        "b": 0.21,
+        "a": 1
+      }
+    },
+    {
+      "id": "workstation_green",
+      "name": "Workstation Green",
+      "color": {
+        "r": 0.27,
+        "g": 0.67,
+        "b": 0.31,
+        "a": 1
+      }
+    }
+  ],
+  "textStyles": [
+    {
+      "id": "heading_large",
+      "name": "Heading Large",
+      "fontSize": 32,
+      "fontWeight": "bold",
+      "fill": {
+        "r": 0.2,
+        "g": 0.2,
+        "b": 0.2,
+        "a": 1
+      }
+    },
+    {
+      "id": "body_medium",
+      "name": "Body Medium",
+      "fontSize": 12,
+      "fill": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "component_template",
+      "name": "Component Template",
+      "type": "COMPONENT",
+      "children": [
+        {
+          "type": "RECTANGLE",
+          "width": 200,
+          "height": 80,
+          "backgroundColor": {
+            "r": 0.13,
+            "g": 0.59,
+            "b": 0.95,
+            "a": 1
+          },
+          "cornerRadius": 8
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created": "2025-10-17T03:09:18.019Z",
+    "description": "Полная визуализация архитектуры LDPlayerManagementSystem с проблемами безопасности",
+    "version": "1.0.0",
+    "author": "Kilo Code Analysis",
+    "project": "LDPlayerManagementSystem"
+  }
+}

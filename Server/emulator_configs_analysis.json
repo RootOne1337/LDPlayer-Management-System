@@ -1,0 +1,347 @@
+{
+  "leidian0.config": {
+    "propertySettings.phoneIMEI": "010067020670557",
+    "propertySettings.phoneIMSI": "460006645800743",
+    "propertySettings.phoneSimSerial": "89860026099371928981",
+    "propertySettings.phoneAndroidId": "6ecae0a3a8a21868",
+    "propertySettings.phoneModel": "SM-S9110",
+    "propertySettings.phoneManufacturer": "samsung",
+    "propertySettings.macAddress": "00DBBF9A087E",
+    "statusSettings.sharedApplications": "C:/Users/dimas/Documents/XuanZhi9/Applications",
+    "statusSettings.sharedPictures": "C:/Users/dimas/Documents/XuanZhi9/Pictures",
+    "statusSettings.sharedMisc": "C:/Users/dimas/Documents/XuanZhi9/Misc",
+    "basicSettings.left": 845,
+    "basicSettings.top": 476,
+    "basicSettings.width": 2277,
+    "basicSettings.height": 1281,
+    "basicSettings.realHeigh": 1332,
+    "basicSettings.realWidth": 2336,
+    "networkSettings.networkEnable": true,
+    "basicSettings.isForstStart": false,
+    "basicSettings.mulFsAddSize": 0,
+    "basicSettings.mulFsAutoSize": 2,
+    "basicSettings.autoRun": false,
+    "basicSettings.rootMode": true,
+    "statusSettings.closeOption": 0,
+    "basicSettings.verticalSync": false,
+    "basicSettings.heightFrameRate": false,
+    "basicSettings.adbDebug": 2,
+    "advancedSettings.resolution": {
+      "width": 960,
+      "height": 540
+    },
+    "advancedSettings.resolutionDpi": 160,
+    "advancedSettings.cpuCount": 4,
+    "advancedSettings.memorySize": 2048,
+    "propertySettings.phoneNumber": "",
+    "basicSettings.autoRotate": false,
+    "basicSettings.isForceLandscape": true,
+    "basicSettings.standaloneSysVmdk": false,
+    "basicSettings.lockWindow": false,
+    "advancedSettings.micphoneName": "",
+    "advancedSettings.speakerName": "",
+    "networkSettings.networkSwitching": false,
+    "networkSettings.networkStatic": false,
+    "networkSettings.networkAddress": "0.0.0.0",
+    "networkSettings.networkGateway": "0.0.0.0",
+    "networkSettings.networkSubnetMask": "255.255.255.0",
+    "networkSettings.networkDNS1": "8.8.8.8",
+    "networkSettings.networkDNS2": "8.8.4.4",
+    "networkSettings.networkInterface": "Realtek Gaming 2.5GbE Family Controller",
+    "basicSettings.disableMouseFastOpt": true,
+    "basicSettings.cjztdisableMouseFastOpt_new": 0,
+    "basicSettings.HDRQuality": 0,
+    "basicSettings.qjcjdisableMouseFast": 1,
+    "basicSettings.fps": 60,
+    "basicSettings.astc": true,
+    "hotkeySettings.backKey": {
+      "modifiers": 0,
+      "key": 27
+    },
+    "hotkeySettings.homeKey": {
+      "modifiers": 0,
+      "key": 112
+    },
+    "hotkeySettings.appSwitchKey": {
+      "modifiers": 0,
+      "key": 113
+    },
+    "hotkeySettings.menuKey": {
+      "modifiers": 0,
+      "key": 114
+    },
+    "hotkeySettings.zoomInKey": {
+      "modifiers": 0,
+      "key": 115
+    },
+    "hotkeySettings.zoomOutKey": {
+      "modifiers": 0,
+      "key": 116
+    },
+    "hotkeySettings.bossKey": {
+      "modifiers": 2,
+      "key": 81
+    },
+    "hotkeySettings.shakeKey": {
+      "modifiers": 0,
+      "key": 120
+    },
+    "hotkeySettings.operationRecordKey": {
+      "modifiers": 0,
+      "key": 121
+    },
+    "hotkeySettings.operationRecordPauseKey": {
+      "modifiers": 0,
+      "key": 0
+    },
+    "hotkeySettings.operationRecordShowFrame": {
+      "modifiers": 2,
+      "key": 56
+    },
+    "hotkeySettings.fullScreenKey": {
+      "modifiers": 0,
+      "key": 122
+    },
+    "hotkeySettings.showMappingKey": {
+      "modifiers": 0,
+      "key": 123
+    },
+    "hotkeySettings.videoRecordKey": {
+      "modifiers": 0,
+      "key": 119
+    },
+    "hotkeySettings.mappingRecordKey": {
+      "modifiers": 0,
+      "key": 117
+    },
+    "hotkeySettings.keyboardModelKey": {
+      "modifiers": 2,
+      "key": 70
+    },
+    "hotkeySettings.soundAddKey": {
+      "modifiers": 2,
+      "key": 107
+    },
+    "hotkeySettings.soundSubKey": {
+      "modifiers": 2,
+      "key": 109
+    },
+    "hotkeySettings.screenCutKey": {
+      "modifiers": 2,
+      "key": 48
+    },
+    "hotkeySettings.miniKey": {
+      "modifiers": 2,
+      "key": 112
+    },
+    "hotkeySettings.multiKey": {
+      "modifiers": 2,
+      "key": 50
+    },
+    "hotkeySettings.installApkKey": {
+      "modifiers": 2,
+      "key": 51
+    },
+    "hotkeySettings.shareFileKey": {
+      "modifiers": 2,
+      "key": 53
+    },
+    "hotkeySettings.locationKey": {
+      "modifiers": 2,
+      "key": 55
+    },
+    "hotkeySettings.syncKey": {
+      "modifiers": 2,
+      "key": 57
+    },
+    "basicSettings.videoQuality": 10,
+    "basicSettings.rightToolBar": true
+  },
+  "leidian1.config": {
+    "propertySettings.phoneIMEI": "867632029202308",
+    "propertySettings.phoneIMSI": "460005266454452",
+    "propertySettings.phoneSimSerial": "89860072058250597314",
+    "propertySettings.phoneAndroidId": "7a938c7df9d50299",
+    "propertySettings.phoneModel": "22081212C",
+    "propertySettings.phoneManufacturer": "Redmi",
+    "propertySettings.macAddress": "00DBB5CA941B",
+    "statusSettings.sharedApplications": "C:/Users/dimas/Documents/XuanZhi9/Applications",
+    "statusSettings.sharedPictures": "C:/Users/dimas/Documents/XuanZhi9/Pictures",
+    "statusSettings.sharedMisc": "C:/Users/dimas/Documents/XuanZhi9/Misc",
+    "basicSettings.left": 0,
+    "basicSettings.top": 0,
+    "basicSettings.width": 3578,
+    "basicSettings.height": 2013,
+    "basicSettings.realHeigh": 2064,
+    "basicSettings.realWidth": 3840,
+    "networkSettings.networkEnable": true,
+    "basicSettings.isForstStart": false,
+    "basicSettings.mulFsAddSize": 0,
+    "basicSettings.mulFsAutoSize": 2,
+    "basicSettings.autoRun": false,
+    "basicSettings.rootMode": true,
+    "statusSettings.closeOption": 0,
+    "basicSettings.verticalSync": false,
+    "basicSettings.heightFrameRate": false,
+    "basicSettings.adbDebug": 2,
+    "advancedSettings.resolution": {
+      "width": 960,
+      "height": 540
+    },
+    "advancedSettings.resolutionDpi": 160,
+    "advancedSettings.cpuCount": 4,
+    "advancedSettings.memorySize": 4096,
+    "propertySettings.phoneNumber": "",
+    "basicSettings.autoRotate": false,
+    "basicSettings.isForceLandscape": true,
+    "basicSettings.standaloneSysVmdk": false,
+    "basicSettings.lockWindow": false,
+    "advancedSettings.micphoneName": "",
+    "advancedSettings.speakerName": "",
+    "networkSettings.networkSwitching": false,
+    "networkSettings.networkStatic": false,
+    "networkSettings.networkAddress": "0.0.0.0",
+    "networkSettings.networkGateway": "0.0.0.0",
+    "networkSettings.networkSubnetMask": "255.255.255.0",
+    "networkSettings.networkDNS1": "8.8.8.8",
+    "networkSettings.networkDNS2": "8.8.4.4",
+    "networkSettings.networkInterface": "Realtek Gaming 2.5GbE Family Controller",
+    "basicSettings.disableMouseFastOpt": true,
+    "basicSettings.cjztdisableMouseFastOpt_new": 0,
+    "basicSettings.HDRQuality": 0,
+    "basicSettings.qjcjdisableMouseFast": 1,
+    "basicSettings.fps": 60,
+    "basicSettings.astc": true,
+    "hotkeySettings.backKey": {
+      "modifiers": 0,
+      "key": 27
+    },
+    "hotkeySettings.homeKey": {
+      "modifiers": 0,
+      "key": 112
+    },
+    "hotkeySettings.appSwitchKey": {
+      "modifiers": 0,
+      "key": 113
+    },
+    "hotkeySettings.menuKey": {
+      "modifiers": 0,
+      "key": 114
+    },
+    "hotkeySettings.zoomInKey": {
+      "modifiers": 0,
+      "key": 115
+    },
+    "hotkeySettings.zoomOutKey": {
+      "modifiers": 0,
+      "key": 116
+    },
+    "hotkeySettings.bossKey": {
+      "modifiers": 2,
+      "key": 81
+    },
+    "hotkeySettings.shakeKey": {
+      "modifiers": 0,
+      "key": 120
+    },
+    "hotkeySettings.operationRecordKey": {
+      "modifiers": 0,
+      "key": 121
+    },
+    "hotkeySettings.operationRecordPauseKey": {
+      "modifiers": 0,
+      "key": 0
+    },
+    "hotkeySettings.operationRecordShowFrame": {
+      "modifiers": 2,
+      "key": 56
+    },
+    "hotkeySettings.fullScreenKey": {
+      "modifiers": 0,
+      "key": 122
+    },
+    "hotkeySettings.showMappingKey": {
+      "modifiers": 0,
+      "key": 123
+    },
+    "hotkeySettings.videoRecordKey": {
+      "modifiers": 0,
+      "key": 119
+    },
+    "hotkeySettings.mappingRecordKey": {
+      "modifiers": 0,
+      "key": 117
+    },
+    "hotkeySettings.keyboardModelKey": {
+      "modifiers": 2,
+      "key": 70
+    },
+    "hotkeySettings.soundAddKey": {
+      "modifiers": 2,
+      "key": 107
+    },
+    "hotkeySettings.soundSubKey": {
+      "modifiers": 2,
+      "key": 109
+    },
+    "hotkeySettings.screenCutKey": {
+      "modifiers": 2,
+      "key": 48
+    },
+    "hotkeySettings.miniKey": {
+      "modifiers": 2,
+      "key": 112
+    },
+    "hotkeySettings.multiKey": {
+      "modifiers": 2,
+      "key": 50
+    },
+    "hotkeySettings.installApkKey": {
+      "modifiers": 2,
+      "key": 51
+    },
+    "hotkeySettings.shareFileKey": {
+      "modifiers": 2,
+      "key": 53
+    },
+    "hotkeySettings.locationKey": {
+      "modifiers": 2,
+      "key": 55
+    },
+    "hotkeySettings.syncKey": {
+      "modifiers": 2,
+      "key": 57
+    },
+    "basicSettings.videoQuality": 10,
+    "statusSettings.playerName": "nifilim",
+    "basicSettings.fsAutoSize": 1
+  },
+  "leidians.config": {
+    "languageId": "ru_RU",
+    "productLanguageId": "ru_RU",
+    "channelOpenId": "1315",
+    "channelLastOpenId": "172",
+    "reduceAudio": true,
+    "isSSD": true,
+    "fromInstall": false,
+    "strp": "apiru",
+    "reportPCInfoTime": "20251017",
+    "lastZoneArea": "Asia/Yekaterinburg",
+    "lastZoneName": "RTZ 4 (зима)",
+    "isBaseboard": true,
+    "vipMode": false,
+    "basicSettings.lastIP": "de",
+    "nextCheckupdateTime": 1760654007,
+    "noiceUserRed": true,
+    "multiPlayerSort": 0,
+    "hasPluginLast": false,
+    "mulTab": true,
+    "exitFullscreenEsc": true,
+    "disableMouseRightOpt": false,
+    "isFirstInstallApk": false,
+    "cleanMode": true,
+    "framesPerSecond": 20,
+    "displayMode": true,
+    "windowsRecordPos": true
+  }
+}

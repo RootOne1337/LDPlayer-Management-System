@@ -1,0 +1,45 @@
+{
+  "ldplayer_path": "C:\\LDPlayer\\LDPlayer9",
+  "exists": true,
+  "vms_folder": "C:\\LDPlayer\\LDPlayer9\\vms",
+  "emulators": [
+    {
+      "config_file": "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian0.config",
+      "name": "leidian0",
+      "properties": {}
+    },
+    {
+      "config_file": "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian1.config",
+      "name": "leidian1",
+      "properties": {}
+    },
+    {
+      "config_file": "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidians.config",
+      "name": "leidians",
+      "properties": {}
+    },
+    {
+      "config_file": "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian0.config",
+      "name": "leidian0",
+      "properties": {}
+    },
+    {
+      "config_file": "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian1.config",
+      "name": "leidian1",
+      "properties": {}
+    },
+    {
+      "config_file": "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidians.config",
+      "name": "leidians",
+      "properties": {}
+    }
+  ],
+  "config_files": [
+    "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian0.config",
+    "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian1.config",
+    "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidians.config",
+    "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian0.config",
+    "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidian1.config",
+    "C:\\LDPlayer\\LDPlayer9\\vms\\config\\leidians.config"
+  ]
+}
