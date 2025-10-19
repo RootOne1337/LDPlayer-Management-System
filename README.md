@@ -16,12 +16,14 @@
 ### 🎯 Основные возможности
 
 #### 🖥️ Управление рабочими станциями
+
 - ✅ **Мониторинг доступности** — проверка состояния workstations в реальном времени
 - ✅ **Удалённое подключение** — SMB, PowerShell Remoting, PyWinRM протоколы
 - ✅ **Сбор системной информации** — CPU, RAM, disk space, LDPlayer версия
 - ✅ **Централизованное управление** — единая точка контроля для 8+ станций
 
 #### 🎮 Управление эмуляторами
+
 - ✅ **CRUD операции** — создание, чтение, обновление, удаление эмуляторов
 - ✅ **Жизненный цикл** — запуск, остановка, перезапуск, переименование
 - ✅ **Массовые операции** — batch start/stop для множественных эмуляторов
@@ -29,6 +31,7 @@
 - ✅ **Модификация настроек** — 14 параметров (CPU, RAM, разрешение, DPI, device info)
 
 #### ⚙️ Конфигурация и настройки
+
 - ✅ **14 модифицируемых параметров:**
   - **Производительность:** CPU ядра, RAM, разрешение экрана, DPI
   - **Device Fingerprinting:** Manufacturer, Model, IMEI, IMSI
@@ -39,14 +42,16 @@
 - ✅ **JSON-based управление** — легко редактируемые файлы настроек
 
 #### 🌐 REST API
+
 - ✅ **30+ endpoints** — полный набор для управления системой
-- ✅ **Swagger UI** — интерактивная документация (http://localhost:8001/docs)
+- ✅ **Swagger UI** — интерактивная документация (<http://localhost:8001/docs>)
 - ✅ **FastAPI framework** — современный async/await подход
 - ✅ **Pydantic validation** — строгая валидация входных данных
 - ✅ **JWT Authentication** — безопасная авторизация
 - ✅ **RBAC** — ролевая модель доступа (admin, operator, viewer)
 
 #### 📊 Мониторинг и логирование
+
 - ✅ **Real-time статус** — WebSocket для живых обновлений
 - ✅ **JSON логирование** — структурированные логи всех операций
 - ✅ **Health checks** — проверка состояния системы и компонентов
@@ -54,6 +59,7 @@
 - ✅ **Circuit Breaker** — защита от каскадных сбоев
 
 #### 🔒 Безопасность
+
 - ✅ **JWT токены** — безопасная аутентификация
 - ✅ **CORS конфигурация** — защита от CSRF атак
 - ✅ **Environment secrets** — никаких hardcoded паролей
@@ -65,12 +71,14 @@
 ## 🚀 Быстрый старт (2 минуты)
 
 ### 1️⃣ Установка зависимостей
+
 ```powershell
 cd Server
 pip install -r requirements.txt
 ```
 
 ### 2️⃣ Настройка переменных окружения
+
 ```powershell
 # Скопировать пример конфигурации
 copy .env.example .env
@@ -80,12 +88,14 @@ notepad .env
 ```
 
 ### 3️⃣ Запуск тестов (проверка работоспособности)
+
 ```powershell
 python -m pytest tests/ -q
 # Ожидается: 125/125 tests passing ✅
 ```
 
 ### 4️⃣ Запуск сервера
+
 ```powershell
 # Вариант 1: Через батник (рекомендуется)
 .\RUN_APP.bat
@@ -95,8 +105,9 @@ python -c "import sys, uvicorn; sys.path.insert(0, '.'); from src.core.server im
 ```
 
 ### 5️⃣ Доступ к интерфейсам
-- **Swagger API Docs:** http://127.0.0.1:8001/docs
-- **Web UI:** http://127.0.0.1:8001/
+
+- **Swagger API Docs:** <http://127.0.0.1:8001/docs>
+- **Web UI:** <http://127.0.0.1:8001/>
 - **Credentials:** `admin` / `admin` (меняется через .env)
 
 ---
@@ -106,6 +117,7 @@ python -c "import sys, uvicorn; sys.path.insert(0, '.'); from src.core.server im
 ### REST API через cURL
 
 #### Получить JWT токен
+
 ```bash
 curl -X POST http://127.0.0.1:8001/api/auth/login \
   -H "Content-Type: application/json" \
@@ -114,6 +126,7 @@ curl -X POST http://127.0.0.1:8001/api/auth/login \
 ```
 
 #### Список всех эмуляторов
+
 ```bash
 TOKEN="your_jwt_token_here"
 curl http://127.0.0.1:8001/api/emulators \
@@ -121,6 +134,7 @@ curl http://127.0.0.1:8001/api/emulators \
 ```
 
 #### Создать новый эмулятор
+
 ```bash
 curl -X POST http://127.0.0.1:8001/api/emulators \
   -H "Authorization: Bearer $TOKEN" \
@@ -140,12 +154,14 @@ curl -X POST http://127.0.0.1:8001/api/emulators \
 ```
 
 #### Запустить эмулятор
+
 ```bash
 curl -X POST http://127.0.0.1:8001/api/emulators/emu_001/start \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 #### Остановить эмулятор
+
 ```bash
 curl -X POST http://127.0.0.1:8001/api/emulators/emu_001/stop \
   -H "Authorization: Bearer $TOKEN"
@@ -246,6 +262,7 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8001/api/emulators/emu_001/start" `
 ## 🛠️ Технологический стек
 
 ### Backend (Production Ready)
+
 - **Python 3.9+** — основной язык
 - **FastAPI 0.115+** — async REST API framework
 - **Pydantic 2.10+** — валидация данных
@@ -255,12 +272,14 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8001/api/emulators/emu_001/start" `
 - **SQLite** — хранилище логов (JSON format)
 
 ### Frontend (In Development)
+
 - **React 18.2** — UI framework
 - **Vite** — build tool
 - **Axios** — HTTP client
 - **Material-UI** — компоненты UI
 
 ### Протоколы и интеграции
+
 - **SMB** — доступ к файловой системе
 - **PowerShell Remoting** — выполнение команд
 - **WebSocket** — real-time обновления
@@ -271,7 +290,7 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8001/api/emulators/emu_001/start" `
 
 ## 🏗️ Архитектура
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │           Центральный Сервер (FastAPI)                  │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
@@ -300,7 +319,8 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8001/api/emulators/emu_001/start" `
 ```
 
 **Execution Flow (Создание эмулятора):**
-```
+
+```text
 1. HTTP POST /api/emulators
    ↓
 2. EmulatorService.create(data)
@@ -322,7 +342,7 @@ Invoke-RestMethod -Uri "http://127.0.0.1:8001/api/emulators/emu_001/start" `
 
 ## 📁 Структура проекта
 
-```
+```text
 LDPlayerManagementSystem/
 ├── Server/                          # Backend FastAPI приложение
 │   ├── src/
@@ -383,22 +403,26 @@ LDPlayerManagementSystem/
 ## 🧪 Тестирование
 
 ### Запуск всех тестов
+
 ```powershell
 cd Server
 python -m pytest tests/ -v
 ```
 
 ### Тесты с покрытием кода
+
 ```powershell
 python -m pytest tests/ --cov=src --cov-report=html
 ```
 
 ### Быстрая проверка (без verbose)
+
 ```powershell
 python -m pytest tests/ -q
 ```
 
 **Текущие результаты:**
+
 - ✅ **125/125 tests passing** (100% pass rate)
 - ✅ **0 failures**, 0 errors, 0 skipped
 - ✅ **Comprehensive coverage:** API, services, managers, utils
@@ -425,6 +449,7 @@ python -m pytest tests/ -q
 ## 🔧 Команды LDPlayer (ldconsole.exe)
 
 ### Основные операции
+
 ```powershell
 # Список эмуляторов (CSV формат)
 ldconsole.exe list2
@@ -437,6 +462,7 @@ ldconsole.exe runninglist
 ```
 
 ### CRUD операции
+
 ```powershell
 # Создать эмулятор
 ldconsole.exe add --name "MyEmulator"
@@ -452,6 +478,7 @@ ldconsole.exe copy --from 0 --name "Copy1"
 ```
 
 ### Жизненный цикл
+
 ```powershell
 # Запустить
 ldconsole.exe launch --index 0
@@ -464,6 +491,7 @@ ldconsole.exe reboot --index 0
 ```
 
 ### Модификация (14 параметров)
+
 ```powershell
 ldconsole.exe modify --index 0 \
   --resolution 1920,1080,320 \    # Разрешение: ширина,высота,DPI
@@ -483,6 +511,7 @@ ldconsole.exe modify --index 0 \
 ```
 
 ### Управление приложениями
+
 ```powershell
 # Установить APK
 ldconsole.exe installapp --index 0 --filename "C:\app.apk"
@@ -499,6 +528,7 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 ## 🎯 Roadmap
 
 ### ✅ Фаза 1: Backend Foundation (COMPLETE)
+
 - [x] FastAPI сервер с async/await
 - [x] 30+ REST API endpoints
 - [x] JWT аутентификация + RBAC
@@ -508,6 +538,7 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 - [x] Swagger документация
 
 ### 🚧 Фаза 2: Frontend Development (IN PROGRESS - 50%)
+
 - [x] React 18 приложение
 - [x] Компоненты UI (Dashboard, Emulators, Workstations)
 - [x] Axios HTTP клиент
@@ -516,6 +547,7 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 - [ ] Полная интеграция с backend
 
 ### 📋 Фаза 3: Advanced Features (PLANNED)
+
 - [ ] Database layer (PostgreSQL/SQLite)
 - [ ] WebSocket real-time updates
 - [ ] Массовые операции UI
@@ -524,6 +556,7 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 - [ ] Performance optimization
 
 ### 📋 Фаза 4: Production Deployment (PLANNED)
+
 - [ ] Docker containerization
 - [ ] CI/CD pipeline (GitHub Actions)
 - [ ] Production environment setup
@@ -546,6 +579,7 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 5. Откройте Pull Request
 
 **Commit Convention:**
+
 - `feat:` — новая функциональность
 - `fix:` — исправление бага
 - `docs:` — документация
@@ -565,7 +599,7 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 
 - **Issues:** [GitHub Issues](https://github.com/RootOne1337/LDPlayer-Management-System/issues)
 - **Documentation:** [Project Docs](INSTALLATION.md)
-- **API Docs:** http://127.0.0.1:8001/docs (когда сервер запущен)
+- **API Docs:** <http://127.0.0.1:8001/docs> (когда сервер запущен)
 
 ---
 
@@ -578,12 +612,8 @@ ldconsole.exe runapp --index 0 --packagename com.example.app
 
 ---
 
-<div align="center">
-
-**Made with ❤️ for Android Emulator Management**
+## Made with ❤️ for Android Emulator Management
 
 ⭐ Поставьте звезду, если проект вам полезен!
 
 [📖 Documentation](INSTALLATION.md) • [🚀 Quick Start](QUICK_START.md) • [🐛 Report Bug](https://github.com/RootOne1337/LDPlayer-Management-System/issues) • [✨ Request Feature](https://github.com/RootOne1337/LDPlayer-Management-System/issues)
-
-</div>
