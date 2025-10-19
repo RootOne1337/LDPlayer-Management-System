@@ -5,14 +5,12 @@
 а также WebSocket интерфейс для real-time обновлений.
 """
 
-import asyncio
 import json
 import os
 import time
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 from pathlib import Path
-from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -43,6 +41,8 @@ from ..utils.detailed_logging import (  # Сверх детальное логи
     log_emulator_operation
 )
 from ..utils.logger import get_logger, LogCategory
+from ..utils.super_logging import SuperLoggingMiddleware  # 🚀 Super logging for all HTTP requests
+from ..utils.diagnostics import run_diagnostics, get_last_report  # 🔍 Enhanced diagnostics
 
 # 🆕 Новые модули для ремедиации
 from ..core.container import container, DIContainer  # DI контейнер
@@ -116,14 +116,33 @@ def initialize_di_services() -> None:
 # ============================================================================
 
 
-# Lifecycle управление с использованием lifespan
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Управление жизненным циклом приложения."""
+# Lifecycle управление - старый способ через события
+async def startup_event():
+    """Обработчик запуска приложения."""
     logger = get_logger(LogCategory.SYSTEM)
     
     # ============ STARTUP ============
-    print("[STARTUP] LDPlayer Management System Server")
+    print("\n" + "=" * 100)
+    print("🚀 ЗАПУСК LDPLAYER MANAGEMENT SYSTEM".center(100))
+    print("=" * 100 + "\n")
+    
+    # 🔍 RUN COMPREHENSIVE DIAGNOSTICS FIRST
+    try:
+        print("🔍 Running system diagnostics...\n")
+        diagnostics_report = await run_diagnostics()
+        
+        if not diagnostics_report.is_healthy:
+            print(f"\n⚠️  WARNING: System has {diagnostics_report.critical_failures} critical failures!")
+            print("Server will continue but some features may not work.\n")
+        else:
+            print("\n✅ All diagnostics passed! System is healthy.\n")
+    except Exception as e:
+        print(f"\n❌ Diagnostics failed: {e}")
+        import traceback
+        traceback.print_exc()
+        print("Continuing with startup...\n")
+    
+    print("\n[STARTUP] LDPlayer Management System Server")
     logger.log_system_event("Starting LDPlayer Management System")
     
     # 🆕 Start tracking server uptime
@@ -152,9 +171,11 @@ async def lifespan(app: FastAPI):
         raise
     
     print("[OK] Server started successfully")
-    
-    # ============ APPLICATION RUNNING ============
-    yield
+
+
+async def shutdown_event():
+    """Обработчик остановки приложения."""
+    logger = get_logger(LogCategory.SYSTEM)
     
     # ============ SHUTDOWN ============
     print("[SHUTDOWN] LDPlayer Management System Server")
@@ -162,7 +183,6 @@ async def lifespan(app: FastAPI):
     
     try:
         # Очистить ресурсы DI контейнера (если есть)
-        # TODO: Добавить метод cleanup() в DIContainer при необходимости
         logger.log_system_event("DI container resources cleaned up")
     except Exception as e:
         logger.log_error(e, "Failed to cleanup resources")
@@ -176,9 +196,12 @@ app = FastAPI(
     description="API для управления LDPlayer эмуляторами на удаленных рабочих станциях",
     version="1.0.0",
     docs_url="/docs",
-    redoc_url="/redoc",
-    lifespan=lifespan
+    redoc_url="/redoc"
 )
+
+# Регистрируем события запуска и остановки
+app.add_event_handler("startup", startup_event)
+app.add_event_handler("shutdown", shutdown_event)
 
 # CORS middleware для поддержки веб-клиентов
 # ВАЖНО: В production указывать только доверенные домены!
@@ -189,12 +212,22 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://localhost:5173",  # Vite dev server
         "http://127.0.0.1:5173",
+        "http://localhost:8000",  # Web UI hosted here
+        "http://127.0.0.1:8000",
         "http://localhost:8001",
         "http://127.0.0.1:8001",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# 🚀 SUPER LOGGING MIDDLEWARE - Логирование всех HTTP запросов
+app.add_middleware(
+    SuperLoggingMiddleware,
+    log_request_body=True,      # Логировать тело запроса (POST/PUT/PATCH)
+    log_response_body=False,    # НЕ логировать ответы (слишком много данных)
+    mask_passwords=True          # Маскировать пароли в логах
 )
 
 
@@ -459,6 +492,116 @@ async def health_check():
         message="Сервер работает нормально",
         data={"status": "healthy"}
     )
+
+
+@app.get("/api/diagnostics")
+async def get_diagnostics(current_user: UserInDB = Depends(get_current_active_user)):
+    """
+    🔍 Получить последний отчёт диагностики системы.
+    
+    Требуется аутентификация. Показывает:
+    - Общее состояние системы (healthy/unhealthy)
+    - Результаты всех 14 категорий тестов
+    - Статистику (success rate, критические ошибки)
+    - Детальную информацию по каждому тесту
+    """
+    report = get_last_report()
+    
+    if report is None:
+        # Если диагностика ещё не запускалась, запустим сейчас
+        report = await run_diagnostics()
+    
+    return {
+        "success": True,
+        "message": "Diagnostics report",
+        "data": report.to_dict()
+    }
+
+
+@app.post("/api/diagnostics/run")
+async def run_diagnostics_now(current_user: UserInDB = Depends(get_current_active_user)):
+    """
+    🔍 Запустить диагностику системы прямо сейчас.
+    
+    Требуется аутентификация. Выполняет полную диагностику:
+    - 14 категорий тестов
+    - Сохраняет отчёт в logs/
+    - Возвращает результаты
+    """
+    # Check if user is admin
+    if current_user.role != UserRole.ADMIN:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only administrators can run diagnostics"
+        )
+    
+    report = await run_diagnostics()
+    
+    return {
+        "success": True,
+        "message": f"Diagnostics completed: {report.passed_tests}/{report.total_tests} passed",
+        "data": report.to_dict()
+    }
+
+
+@app.get("/api/project/analyze")
+async def get_project_analysis(current_user: UserInDB = Depends(get_current_active_user)):
+    """
+    🧠 Получить последний отчёт анализа проекта.
+    
+    Требуется аутентификация. Показывает:
+    - Структуру проекта и модулей
+    - Зависимости между компонентами
+    - Неиспользуемый код
+    - Циклические зависимости
+    - Рекомендации по оптимизации
+    """
+    from ..utils.project_analyzer import get_last_analysis_report
+    
+    report = get_last_analysis_report()
+    
+    if report is None:
+        return {
+            "success": False,
+            "message": "Project analysis not yet performed. Use POST /api/project/analyze to run analysis.",
+            "data": None
+        }
+    
+    return {
+        "success": True,
+        "message": "Project analysis report",
+        "data": report.to_dict()
+    }
+
+
+@app.post("/api/project/analyze")
+async def run_project_analysis(current_user: UserInDB = Depends(get_current_active_user)):
+    """
+    🧠 Запустить полный анализ проекта.
+    
+    Требуется роль ADMIN. Выполняет:
+    - Сканирование всех модулей
+    - Анализ зависимостей
+    - Поиск неиспользуемого кода
+    - Анализ сложности
+    - Генерацию рекомендаций
+    """
+    # Check if user is admin
+    if current_user.role != UserRole.ADMIN:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only administrators can run project analysis"
+        )
+    
+    from ..utils.project_analyzer import analyze_project
+    
+    report = analyze_project()
+    
+    return {
+        "success": True,
+        "message": f"Project analysis completed: {report.total_modules} modules analyzed",
+        "data": report.to_dict()
+    }
 
 
 @app.get("/api/status", response_model=ServerStatus)

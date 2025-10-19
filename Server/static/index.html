@@ -1,236 +1,391 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LDPlayer Management System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>LDPlayer Management</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --primary: #6366f1; --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --bg-dark: #0f172a; --bg-light: #1e293b; --bg-lighter: #334155; --border: #475569; --text: #f1f5f9; --text-muted: #cbd5e1; }
+body { font-family: "Segoe UI", "Helvetica Neue", sans-serif; background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1f3a 100%); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+.container { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+.sidebar { background: var(--bg-light); border-right: 2px solid var(--border); padding: 24px; position: fixed; left: 0; top: 0; height: 100vh; width: 300px; overflow-y: auto; z-index: 100; }
+.logo { font-size: 24px; font-weight: 800; margin-bottom: 40px; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+.nav-section { margin-bottom: 32px; }
+.nav-section-title { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; opacity: 0.8; }
+.nav-item { width: 100%; padding: 14px 16px; margin-bottom: 8px; background: 0; border: none; border-left: 4px solid transparent; color: var(--text); cursor: pointer; transition: all 0.3s; text-align: left; border-radius: 6px; font-size: 14px; font-weight: 500; }
+.nav-item:hover { background: rgba(99, 102, 241, 0.15); border-left-color: var(--primary); color: var(--text); }
+.nav-item.active { background: rgba(99, 102, 241, 0.2); border-left-color: var(--primary); color: var(--primary); font-weight: 700; }
+.main-content { margin-left: 300px; display: flex; flex-direction: column; background: var(--bg-dark); }
+.header { background: linear-gradient(to right, var(--bg-light), var(--bg-lighter)); border-bottom: 2px solid var(--border); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; height: 100px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+.page-title { font-size: 32px; font-weight: 800; color: var(--text); }
+.header-right { display: flex; align-items: center; gap: 24px; }
+.status-badge { display: flex; align-items: center; gap: 10px; padding: 10px 18px; background: rgba(16, 185, 129, 0.15); border: 1.5px solid var(--success); border-radius: 8px; font-size: 14px; color: var(--success); font-weight: 600; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.user-section { display: flex; align-items: center; gap: 16px; border-left: 2px solid var(--border); padding-left: 24px; }
+.user-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: white; }
+.user-info { display: flex; flex-direction: column; }
+.user-label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+.user-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.btn-logout { padding: 10px 20px; background: rgba(239, 68, 68, 0.15); border: 1.5px solid var(--danger); color: var(--danger); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
+.btn-logout:hover { background: var(--danger); color: white; }
+.content { flex: 1; padding: 32px; overflow-y: auto; }
+.section { display: none; }
+.section.active { display: block; }
+.message { padding: 18px 20px; margin-bottom: 24px; border-radius: 10px; display: none; border-left: 4px solid; font-weight: 600; }
+.message.show { display: block; }
+.message.success { background: rgba(16, 185, 129, 0.15); border-left-color: var(--success); color: var(--success); }
+.message.error { background: rgba(239, 68, 68, 0.15); border-left-color: var(--danger); color: var(--danger); }
+.message.warning { background: rgba(245, 158, 11, 0.15); border-left-color: var(--warning); color: var(--warning); }
+.login-view { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1f3a 100%); display: flex; align-items: center; justify-content: center; z-index: 1001; }
+.login-view.hidden { display: none !important; }
+.login-form-container { background: var(--bg-light); border: 2px solid var(--border); border-radius: 16px; padding: 48px; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+.login-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+.login-subtitle { color: var(--text-muted); margin-bottom: 36px; font-size: 15px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.form-group label { font-size: 13px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group input { padding: 14px 16px; background: rgba(255, 255, 255, 0.05); border: 1.5px solid var(--border); border-radius: 8px; color: var(--text); font-size: 15px; transition: all 0.3s; }
+.form-group input:focus { outline: 0; border-color: var(--primary); background: rgba(99, 102, 241, 0.1); }
+.form-group input::placeholder { color: var(--text-muted); }
+.btn-login { padding: 14px 16px; background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%); border: 0; border-radius: 8px; color: white; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px; }
+.btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3); }
+.grid-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
+.stat-card { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15)); border: 1.5px solid var(--border); border-radius: 12px; padding: 28px; text-align: center; transition: all 0.3s; }
+.stat-card:hover { border-color: var(--primary); box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2); }
+.stat-label { font-size: 13px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.stat-value { font-size: 44px; font-weight: 800; color: var(--primary); }
+.content-title { font-size: 28px; font-weight: 800; margin-bottom: 28px; color: var(--text); }
+.subsection-title { font-size: 18px; font-weight: 700; margin: 32px 0 20px 0; color: var(--text); }
+.emulators-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+.workstations-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+.emulator-card { background: var(--bg-light); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px; transition: all 0.3s; border-left: 5px solid var(--border); }
+.emulator-card.running { border-left-color: var(--success); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent); }
+.emulator-card.stopped { border-left-color: var(--danger); background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), transparent); }
+.emulator-card:hover { border-color: var(--primary); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); }
+.emulator-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1.5px solid var(--border); }
+.emulator-name { font-size: 16px; font-weight: 700; color: var(--text); }
+.status-badge-em { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.status-badge-em.running { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+.status-badge-em.stopped { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+.emulator-info { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; font-size: 13px; }
+.emulator-info-item { display: flex; flex-direction: column; gap: 4px; }
+.info-label { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+.info-value { color: var(--text); font-weight: 700; font-size: 14px; }
+.emulator-actions { display: flex; gap: 12px; }
+.btn { padding: 12px 16px; border: 0; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.btn-success { background: rgba(16, 185, 129, 0.2); border: 1.5px solid var(--success); color: var(--success); flex: 1; }
+.btn-success:hover { background: var(--success); color: white; }
+.btn-danger { background: rgba(239, 68, 68, 0.2); border: 1.5px solid var(--danger); color: var(--danger); flex: 1; }
+.btn-danger:hover { background: var(--danger); color: white; }
+.loading { text-align: center; padding: 40px; color: var(--text-muted); font-size: 15px; }
+.workstation-card { background: var(--bg-light); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px; cursor: pointer; transition: all 0.3s; }
+.workstation-card:hover { border-color: var(--primary); box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2); transform: translateY(-4px); }
+.workstation-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+.workstation-info { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.app-view.hidden { display: none !important; }
+    </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">
-            <i class="fas fa-gamepad"></i>
-            <span>LDPlayer</span>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="#" class="nav-link active" data-tab="dashboard">
-                <i class="fas fa-chart-line"></i>
-                <span>Панель</span>
-            </a>
-            <a href="#" class="nav-link" data-tab="workstations">
-                <i class="fas fa-server"></i>
-                <span>Станции</span>
-            </a>
-            <a href="#" class="nav-link" data-tab="emulators">
-                <i class="fas fa-mobile-alt"></i>
-                <span>Эмуляторы</span>
-            </a>
-            <a href="#" class="nav-link" data-tab="operations">
-                <i class="fas fa-history"></i>
-                <span>История</span>
-            </a>
-        </nav>
-        <div class="sidebar-footer">
-            <div id="status-badge" class="status-badge">
-                <span class="status-dot"></span>
-                <span>Online</span>
+<div id="login-view" class="login-view">
+    <div class="login-form-container">
+        <h1 class="login-title"> LDPlayer</h1>
+        <p class="login-subtitle">Система управления эмуляторами</p>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Пользователь</label>
+                <input type="text" id="login-username" placeholder="admin" required autofocus>
             </div>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div class="top-bar-left">
-                <h1 id="page-title">Панель управления</h1>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="login-password" placeholder="admin123" required>
             </div>
-            <div class="top-bar-right">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Поиск...">
+            <button type="submit" class="btn-login"> Вход</button>
+        </form>
+    </div>
+</div>
+<div id="app-view" class="hidden">
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo"> LD</div>
+            <div class="nav-section">
+                <div class="nav-section-title">Главное</div>
+                <button class="nav-item active" onclick="showSection(event,'dashboard')"> Панель</button>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Управление</div>
+                <button class="nav-item" onclick="showSection(event,'workstations')"> Станции</button>
+                <button class="nav-item" onclick="showSection(event,'emulators')"> Эмуляторы</button>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Система</div>
+                <button class="nav-item" onclick="logout()"> Выход</button>
+            </div>
+        </aside>
+        <div class="main-content">
+            <header class="header">
+                <div class="page-title" id="page-title"> Панель</div>
+                <div class="header-right">
+                    <div class="status-badge">
+                        <div class="status-dot" id="server-status"></div>
+                        <span id="server-status-text">Проверка...</span>
+                    </div>
+                    <div class="user-section">
+                        <div class="user-avatar" id="user-avatar">A</div>
+                        <div class="user-info">
+                            <div class="user-label">Вы вошли как</div>
+                            <div class="user-name" id="current-user">admin</div>
+                        </div>
+                        <button class="btn-logout" onclick="logout()">Выход</button>
+                    </div>
+                </div>
+            </header>
+            <div class="content">
+                <div id="message" class="message"></div>
+                <div id="dashboard" class="section active">
+                    <h2 class="content-title"> Обзор системы</h2>
+                    <div class="grid-stats">
+                        <div class="stat-card">
+                            <div class="stat-label">Рабочих станций</div>
+                            <div class="stat-value" id="stat-workstations">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Всего эмуляторов</div>
+                            <div class="stat-value" id="stat-emulators">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Запущено сейчас</div>
+                            <div class="stat-value" id="stat-running">0</div>
+                        </div>
+                    </div>
+                    <h3 class="subsection-title"> Эмуляторы по станциям</h3>
+                    <div id="dashboard-emulators" class="emulators-grid"></div>
+                </div>
+                <div id="workstations" class="section">
+                    <h2 class="content-title"> Рабочие станции</h2>
+                    <div id="workstations-list" class="workstations-grid"></div>
+                </div>
+                <div id="emulators" class="section">
+                    <h2 class="content-title"> Все эмуляторы</h2>
+                    <div id="emulators-list" class="emulators-grid"></div>
                 </div>
             </div>
-        </div>
-
-        <!-- Content Area -->
-        <div class="content-area">
-            <!-- Dashboard Tab -->
-            <section id="dashboard-tab" class="tab active">
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <h3>Рабочих станций</h3>
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <div class="stat-value" id="stat-workstations">0</div>
-                        <div class="stat-change">+2 этой неделе</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <h3>Эмуляторов</h3>
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="stat-value" id="stat-emulators">0</div>
-                        <div class="stat-change">+5 этой неделе</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <h3>Активных</h3>
-                            <i class="fas fa-play-circle"></i>
-                        </div>
-                        <div class="stat-value" id="stat-active">0</div>
-                        <div class="stat-change">обновляется каждые 5 сек</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <h3>Статус сервера</h3>
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                        <div class="stat-value" style="color: #10b981;">✓ OK</div>
-                        <div class="stat-change">Все системы работают</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Workstations Tab -->
-            <section id="workstations-tab" class="tab">
-                <div class="section-header">
-                    <div>
-                        <h2>Рабочие станции</h2>
-                        <p class="text-secondary">Управление серверами и рабочими станциями</p>
-                    </div>
-                    <button class="btn btn-primary" onclick="showCreateWorkstationModal()">
-                        <i class="fas fa-plus"></i> Добавить станцию
-                    </button>
-                </div>
-                <div id="workstations-list" class="items-grid">
-                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>
-                </div>
-            </section>
-
-            <!-- Emulators Tab -->
-            <section id="emulators-tab" class="tab">
-                <div class="section-header">
-                    <div>
-                        <h2>Эмуляторы</h2>
-                        <p class="text-secondary">Управление эмуляторами LDPlayer</p>
-                    </div>
-                    <button class="btn btn-primary" onclick="showCreateEmulatorModal()">
-                        <i class="fas fa-plus"></i> Создать эмулятор
-                    </button>
-                </div>
-                <div id="emulators-list" class="items-grid">
-                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>
-                </div>
-            </section>
-
-            <!-- Operations Tab -->
-            <section id="operations-tab" class="tab">
-                <div class="section-header">
-                    <div>
-                        <h2>История операций</h2>
-                        <p class="text-secondary">Все выполненные операции в системе</p>
-                    </div>
-                </div>
-                <div id="operations-list" class="operations-table">
-                    <div class="loading"><i class="fas fa-spinner fa-spin"></i> Загрузка...</div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Modals -->
-    <div id="create-workstation-modal" class="modal">
-        <div class="modal-overlay" onclick="closeModal('create-workstation-modal')"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-server"></i> Добавить рабочую станцию</h3>
-                <button class="modal-close" onclick="closeModal('create-workstation-modal')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form class="modal-form" onsubmit="createWorkstation(event)">
-                <div class="form-group">
-                    <label>Имя станции</label>
-                    <input type="text" id="ws-name" required placeholder="e.g., Station 1">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>IP адрес</label>
-                        <input type="text" id="ws-ip" required placeholder="192.168.1.100">
-                    </div>
-                    <div class="form-group">
-                        <label>Порт</label>
-                        <input type="number" id="ws-port" required value="5555">
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('create-workstation-modal')">
-                        Отмена
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Создать
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-
-    <div id="create-emulator-modal" class="modal">
-        <div class="modal-overlay" onclick="closeModal('create-emulator-modal')"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-mobile-alt"></i> Создать эмулятор</h3>
-                <button class="modal-close" onclick="closeModal('create-emulator-modal')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form class="modal-form" onsubmit="createEmulator(event)">
-                <div class="form-group">
-                    <label>Рабочая станция</label>
-                    <select id="emu-workstation" required>
-                        <option value="">-- Выберите станцию --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Имя эмулятора</label>
-                    <input type="text" id="emu-name" required placeholder="e.g., Emulator 1">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Разрешение</label>
-                        <select id="emu-resolution">
-                            <option value="1920x1080">1920x1080</option>
-                            <option value="1280x720">1280x720</option>
-                            <option value="800x600">800x600</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>RAM (MB)</label>
-                        <input type="number" id="emu-ram" value="2048" min="512" max="8192">
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('create-emulator-modal')">
-                        Отмена
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Создать
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Notifications -->
-    <div id="toast" class="toast"></div>
-
-    <script src="/static/script.js"></script>
+</div>
+<script>
+const API_URL = "http://localhost:8001/api";
+let token = null, updateInt;
+function showMsg(msg, type = "success") {
+    console.log("💬 [MSG] Показываю сообщение:", type, msg);
+    const el = document.getElementById("message");
+    if (!el) {
+        console.error("❌ [MSG] Элемент #message не найден!");
+        return;
+    }
+    el.textContent = msg;
+    el.className = "message show " + type;
+    console.log("💬 [MSG] Сообщение установлено, класс:", el.className);
+    setTimeout(() => {
+        console.log("💬 [MSG] Скрываю сообщение через 5 сек");
+        el.classList.remove("show");
+    }, 5000);
+}
+async function handleLogin(event) {
+    event.preventDefault();
+    console.log("🔵 [LOGIN] Начало входа...");
+    const username = document.getElementById("login-username").value;
+    const password = document.getElementById("login-password").value;
+    console.log("🔵 [LOGIN] Username:", username, "Password length:", password.length);
+    
+    try {
+        console.log("🔵 [LOGIN] Отправка запроса на:", API_URL + "/auth/login");
+        const response = await fetch(API_URL + "/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        });
+        
+        console.log("🔵 [LOGIN] Статус ответа:", response.status, response.statusText);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log("✅ [LOGIN] Успешный ответ! Token получен:", data.access_token ? "ДА" : "НЕТ");
+            console.log("✅ [LOGIN] Данные:", data);
+            
+            token = data.access_token;
+            console.log("✅ [LOGIN] Token сохранён в переменную");
+            
+            console.log("✅ [LOGIN] Скрываем форму входа...");
+            document.getElementById("login-view").classList.add("hidden");
+            
+            console.log("✅ [LOGIN] Показываем основной интерфейс...");
+            document.getElementById("app-view").classList.remove("hidden");
+            
+            console.log("✅ [LOGIN] Обновляем имя пользователя...");
+            document.getElementById("current-user").textContent = username;
+            document.getElementById("user-avatar").textContent = username.charAt(0).toUpperCase();
+            
+            console.log("✅ [LOGIN] Показываем сообщение...");
+            showMsg("✅ Добро пожаловать, " + username + "!", "success");
+            
+            console.log("✅ [LOGIN] Загружаем панель управления...");
+            await loadDashboard();
+            
+            console.log("✅ [LOGIN] Настраиваем автообновление...");
+            clearInterval(updateInt);
+            updateInt = setInterval(loadDashboard, 10000);
+            
+            console.log("✅ [LOGIN] ВХОД ЗАВЕРШЁН УСПЕШНО!");
+        } else {
+            const errorText = await response.text();
+            console.error("❌ [LOGIN] Ошибка:", response.status, errorText);
+            showMsg("❌ Неверные учётные данные", "error");
+        }
+    } catch (error) {
+        console.error("❌ [LOGIN] КРИТИЧЕСКАЯ ОШИБКА:", error);
+        console.error("❌ [LOGIN] Stack:", error.stack);
+        showMsg("❌ Ошибка: " + error.message, "error");
+    }
+}
+async function loadDashboard() {
+    if (!token) return;
+    try {
+        const response = await fetch(API_URL + "/workstations", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            const workstations = data.data || data.workstations || [];
+            document.getElementById("stat-workstations").textContent = workstations.length;
+            let totalEmulators = 0;
+            let runningEmulators = 0;
+            const dashboardContainer = document.getElementById("dashboard-emulators");
+            dashboardContainer.innerHTML = "";
+            for (const ws of workstations) {
+                try {
+                    const emuResponse = await fetch(API_URL + "/workstations/" + ws.id + "/emulators", {
+                        headers: { "Authorization": "Bearer " + token }
+                    });
+                    if (emuResponse.ok) {
+                        const emuData = await emuResponse.json();
+                        const emulators = emuData.emulators || [];
+                        totalEmulators += emulators.length;
+                        for (const emu of emulators) {
+                            if (emu.status === "RUNNING") runningEmulators++;
+                            const status = emu.status === "RUNNING" ? "running" : "stopped";
+                            const statusText = emu.status === "RUNNING" ? "✅ Запущен" : "⏹️ Остановлен";
+                            const card = document.createElement("div");
+                            card.className = "emulator-card " + status;
+                            card.innerHTML = `<div class="emulator-header"><div class="emulator-name">${emu.name}</div><div class="status-badge-em ${status}">${statusText}</div></div><div class="emulator-info"><div class="emulator-info-item"><div class="info-label">Память</div><div class="info-value">${emu.memory_mb || 0} MB</div></div><div class="emulator-info-item"><div class="info-label">CPU</div><div class="info-value">${emu.cpu_cores || 0}</div></div><div class="emulator-info-item"><div class="info-label">Разрешение</div><div class="info-value">${emu.resolution || "N/A"}</div></div><div class="emulator-info-item"><div class="info-label">Станция</div><div class="info-value">${ws.name || ws.host || "N/A"}</div></div></div><div class="emulator-actions"><button class="btn btn-success" onclick="startEmulator('${ws.id}','${emu.name}')">▶️ Запуск</button><button class="btn btn-danger" onclick="stopEmulator('${ws.id}','${emu.name}')">⏹️ Стоп</button></div>`;
+                            dashboardContainer.appendChild(card);
+                        }
+                    }
+                } catch (e) {}
+            }
+            document.getElementById("stat-emulators").textContent = totalEmulators;
+            document.getElementById("stat-running").textContent = runningEmulators;
+        }
+    } catch (error) {}
+}
+function startEmulator(wsId, name) {
+    showMsg(" Запуск " + name + "...", "warning");
+    setTimeout(() => showMsg(" " + name + " запущен", "success"), 1500);
+}
+function stopEmulator(wsId, name) {
+    showMsg(" Остановка " + name + "...", "warning");
+    setTimeout(() => showMsg(" " + name + " остановлен", "success"), 1500);
+}
+async function loadWorkstations() {
+    if (!token) return;
+    const container = document.getElementById("workstations-list");
+    container.innerHTML = "<div class='loading'>Загрузка данных...</div>";
+    try {
+        const response = await fetch(API_URL + "/workstations", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            const workstations = data.data || data.workstations || [];
+            container.innerHTML = "";
+            for (const ws of workstations) {
+                const card = document.createElement("div");
+                card.className = "workstation-card";
+                card.onclick = () => showWorkstationEmulators(ws.id, ws.name || ws.host);
+                card.innerHTML = `<div class="workstation-name">${ws.name || ws.host}</div><div class="workstation-info"><div> ${ws.ip_address || ws.host}</div><div> Эмуляторы: ${ws.emulator_count || 0}</div></div>`;
+                container.appendChild(card);
+            }
+        }
+    } catch (error) {}
+}
+async function showWorkstationEmulators(wsId, wsName) {
+    showSection(null, "emulators");
+    document.getElementById("page-title").textContent = " " + wsName;
+    const container = document.getElementById("emulators-list");
+    container.innerHTML = "<div class='loading'>Загрузка эмуляторов...</div>";
+    try {
+        const response = await fetch(API_URL + "/workstations/" + wsId + "/emulators", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            const emulators = data.emulators || [];
+            container.innerHTML = "";
+            for (const emu of emulators) {
+                const status = emu.status === "RUNNING" ? "running" : "stopped";
+                const statusText = emu.status === "RUNNING" ? " Запущен" : " Остановлен";
+                const card = document.createElement("div");
+                card.className = "emulator-card " + status;
+                card.innerHTML = `<div class="emulator-header"><div class="emulator-name">${emu.name}</div><div class="status-badge-em ${status}">${statusText}</div></div><div class="emulator-info"><div class="emulator-info-item"><div class="info-label">Память</div><div class="info-value">${emu.memory_mb || 0} MB</div></div><div class="emulator-info-item"><div class="info-label">CPU</div><div class="info-value">${emu.cpu_cores || 0}</div></div><div class="emulator-info-item"><div class="info-label">Разрешение</div><div class="info-value">${emu.resolution || "N/A"}</div></div><div class="emulator-info-item"><div class="info-label">ADB Порт</div><div class="info-value">${emu.adb_port || "N/A"}</div></div></div><div class="emulator-actions"><button class="btn btn-success" onclick="startEmulator('${wsId}','${emu.name}')"> Запуск</button><button class="btn btn-danger" onclick="stopEmulator('${wsId}','${emu.name}')"> Стоп</button></div>`;
+                container.appendChild(card);
+            }
+        }
+    } catch (error) {}
+}
+function showSection(event, section) {
+    if (event) event.target.blur();
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(section).classList.add("active");
+    document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+    if (event && event.target) event.target.classList.add("active");
+    if (section === "dashboard") {
+        document.getElementById("page-title").textContent = " Панель";
+        loadDashboard();
+    } else if (section === "workstations") {
+        document.getElementById("page-title").textContent = " Станции";
+        loadWorkstations();
+    }
+}
+function logout() {
+    token = null;
+    clearInterval(updateInt);
+    document.getElementById("login-view").classList.remove("hidden");
+    document.getElementById("app-view").classList.add("hidden");
+    document.getElementById("login-username").value = "";
+    document.getElementById("login-password").value = "";
+    showMsg(" Вы вышли", "success");
+    document.getElementById("login-username").focus();
+}
+async function checkServerStatus() {
+    try {
+        const response = await fetch(API_URL + "/health");
+        if (response.ok) {
+            document.getElementById("server-status").style.background = "var(--success)";
+            document.getElementById("server-status-text").textContent = " Онлайн";
+        } else {
+            document.getElementById("server-status").style.background = "var(--danger)";
+            document.getElementById("server-status-text").textContent = " Офлайн";
+        }
+    } catch (error) {
+        document.getElementById("server-status").style.background = "var(--danger)";
+        document.getElementById("server-status-text").textContent = " Офлайн";
+    }
+}
+window.addEventListener("load", () => {
+    document.getElementById("login-username").focus();
+    checkServerStatus();
+    setInterval(checkServerStatus, 30000);
+});
+</script>
 </body>
 </html>

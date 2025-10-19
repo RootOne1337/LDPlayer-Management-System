@@ -308,3 +308,79 @@ async def get_workstation_system_info(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Ошибка получения информации: {str(e)}"
         )
+
+
+@router.get("/{workstation_id}/emulators", tags=["emulators"])
+async def get_workstation_emulators(
+    workstation_id: str,
+    service: WorkstationService = Depends(get_workstation_service),
+    current_user: str = Depends(verify_token)
+) -> Dict[str, Any]:
+    r"""Получить список эмуляторов на рабочей станции.
+    
+    Сканирует папку C:\LDPlayer\LDPlayer9 и возвращает найденные эмуляторы
+    с информацией об их статусе, памяти, CPU и т.д.
+    
+    Args:
+        workstation_id: ID рабочей станции
+        
+    Returns:
+        Список эмуляторов с деталями
+    """
+    try:
+        from ..remote.emulator_scanner import EmulatorScanner
+        
+        ws = await service.get_or_fail(workstation_id)
+        
+        # Создать подходящий сканер
+        scanner = EmulatorScanner.create(
+            host=ws.ip_address,
+            username=ws.username,
+            password=ws.password,
+            ldplayer_path=ws.ldplayer_path
+        )
+        
+        # Выполнить сканирование
+        emulators = scanner.scan()
+        
+        logger.log_system_event(
+            f"Отсканированы эмуляторы станции {workstation_id}",
+            {
+                "workstation_id": workstation_id,
+                "emulators_count": len(emulators)
+            }
+        )
+        
+        return {
+            "success": True,
+            "workstation_id": workstation_id,
+            "workstation_name": ws.name,
+            "emulators": [emu.to_dict() for emu in emulators],
+            "count": len(emulators)
+        }
+    
+    except Exception as e:
+        logger.log_error(f"Ошибка сканирования эмуляторов станции {workstation_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Ошибка сканирования эмуляторов: {str(e)}"
+        )
+
+
+@router.post("/{workstation_id}/emulators/scan", tags=["emulators"])
+async def scan_workstation_emulators(
+    workstation_id: str,
+    service: WorkstationService = Depends(get_workstation_service),
+    current_user: str = Depends(verify_token)
+) -> Dict[str, Any]:
+    """Принудительное сканирование эмуляторов на рабочей станции.
+    
+    Идентично GET, но может использоваться для явного указания действия.
+    
+    Args:
+        workstation_id: ID рабочей станции
+        
+    Returns:
+        Результат сканирования
+    """
+    return await get_workstation_emulators(workstation_id, service, current_user)

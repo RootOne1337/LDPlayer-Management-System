@@ -1,12 +1,36 @@
-# Текущее состояние проекта LDPlayerManagementSystem
+# 📊 Текущее состояние проекта LDPlayer Management System
 
-**Дата обновления:** 2025-10-19 00:15 (Audit & Critical Fixes - 5/5 APPLIED ✅)
+**Дата обновления:** 2025-10-19 21:50 (Cleanup Phase - 2/5 модулей удалены ✅)  
+**Статус:** В активной разработке 🚧
 
-## Технологический стек
+## 🏗️ Технологический стек
+
+### Backend
 - **Язык:** Python 3.13.2
-- **Web Framework:** FastAPI
-- **Testing:** pytest + pytest-asyncio (100% coverage target)
-- **Зависимости:** FastAPI, uvicorn, pydantic, httpx, python-dotenv
+- **Web Framework:** FastAPI (высокопроизводительный асинхронный REST API)
+- **ASGI Server:** Uvicorn
+- **База данных:** SQLite (`workstations.db`) - 212 workstations
+- **Testing:** pytest + pytest-asyncio
+
+### Authentication & Security
+- **JWT:** JSON Web Tokens (HS256 algorithm, 30 min expiration)
+- **Роли:** admin, operator, viewer (role-based access control)
+
+### Remote Protocols
+- **ADB:** Port 5555 (Android Debug Bridge)
+- **WinRM:** Port 5985 (Windows Remote Management)  
+- **SSH:** через paramiko
+- **SMB:** через smbprotocol
+
+### LDPlayer Integration
+- **Путь:** `C:\LDPlayer\LDPlayer9\`
+- **Эмуляторы:** 2 активных (LDPlayer, AutoTest-1760670196)
+- **CLI:** ldconsole.exe
+
+### 🆕 Новые модули (2025-10-19)
+- **Enhanced Diagnostics** (`src/utils/diagnostics.py`) - 14 категорий тестов
+- **SuperLoggingMiddleware** (`src/utils/super_logging.py`) - HTTP/WebSocket logging
+- **ProjectAnalyzer** (`src/utils/project_analyzer.py`) - Интеллектуальный анализ кода
 
 ## Структура проекта
 
