@@ -63,40 +63,6 @@
 ---
 
 ## 🚀 Быстрый старт (2 минуты)
-```bash
-GET /api/emulators
-# Returns REAL emulator data from ldconsole.exe list2
-# Example response:
-[
-  {
-    "id": "emu_001",
-    "name": "Emulator1", 
-    "status": "running",
-    "workstation_id": "ws_001",
-    "android_version": "9.0",
-    "screen_size": "1280x720"
-  },
-  ...
-]
-```
-
-### ✅ Complete API (23 endpoints)
-- **Auth (2):** login, refresh
-- **Workstations (7):** list, create, get, delete, test, emulators, system-info
-- **Emulators (9):** list, create, get, start, stop, delete, rename, batch-start, batch-stop
-- **Operations (2):** list, logs
-- **Health (2):** check, status
-
-### ✅ Full Test Suite
-- 125/125 tests PASSING
-- 0 failures, 0 errors
-- Comprehensive coverage
-- Async/sync properly mocked
-
-### ✅ Production-Ready Server
-- FastAPI on 127.0.0.1:8001
-- Security checks passed
-- DI container initialized
 
 ### 1️⃣ Установка зависимостей
 ```powershell
